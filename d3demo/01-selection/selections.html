@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Test</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="myclass">
+        <p></p>
+        <p></p>
+    </div>
+
+
+    <table>
+        <tr><td>Some Data1</td></tr>
+        <tr><td>Some Data2</td></tr>
+        <tr><td>Some Data3</td></tr>
+    </table>
+   
+   
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+<script>
+
+    
+
+    d3.selectAll('div.myclass > p')
+        .each(function(){
+            console.log(this);
+            d3.select(this).text('ABCD');
+        })
+
+
+     var trSelection = d3.selectAll('tr');   
+
+     trSelection.each(function(d, i){
+         console.log(i);
+         if(i%2==0){
+            d3.select(this).style('background-color', 'gray')
+         }
+         else{
+            d3.select(this).style('background-color', 'white')
+         }
+         console.log(this);
+     })
+    
+</script>
+
+</body>
+</html>

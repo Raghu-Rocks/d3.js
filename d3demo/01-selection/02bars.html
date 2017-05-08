@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Test</title>
+
+    <style>
+        body{
+            font-size: 24px
+        }
+        p {
+            color: red;
+            margin-top: 20px;
+            border: 5px solid red;
+
+        }
+    </style>
+</head>
+<body>
+   
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+<script>
+
+    var data = [23,54,66,45,67,89]
+
+    var bars = d3.select('body').selectAll('p')
+        .data(data)
+       /* .text(function(d){
+            return d;
+        })*/
+
+    bars.enter()
+        .append('p')    
+        .text(function(d){
+            return d;
+        })
+
+    // bars.exit().remove()    
+    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+    <div id="test">Domsd jsdk</div>
+    <div>ds g sd</div>
+    <div>ds gsd </div>
+    <button onclick="changeText()">Change Text</button>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+<script>
+    function changeText(){
+        // document.getElementById('test').innerHTML = "Some other value sd dg sdg ds "
+        d3.select('#test').html('Change using d3JS')
+    }
+</script>
+
+</body>
+</html>

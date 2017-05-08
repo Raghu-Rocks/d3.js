@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div>
+
+    </div>
+
+    <script>
+    
+        function widget(){
+            var obj = {};
+            obj.desc = ''
+            obj.heading = 'Some Title'
+
+            obj.description = function(d){
+                if(!arguments.length) return obj.desc
+                obj.desc = d;
+                return obj;
+            }
+
+            obj.title = function(t){
+                if(!arguments.length) return obj.heading
+                obj.heading = t;
+                return obj;
+            }
+            return obj;
+        }
+
+        widget().description('Some widget').title('XYZ title')
+        widget().description()
+
+    
+    </script>
+</body>
+</html>

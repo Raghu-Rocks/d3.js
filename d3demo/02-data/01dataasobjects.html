@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title>Test</title>
+
+    <style>
+        .h-bar {
+            min-width: 15px;
+            background-color: blue;
+            margin: 5px;
+            padding-bottom: 2px;
+            color: white;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+    <script>
+        
+
+        function render(data) {
+
+            let scale = d3.scaleLinear()
+                .domain([0, 100])
+                .range(['red','blue']);
+
+            var bars = d3.select('body').selectAll('div')
+                .data(data)
+
+                
+            bars.text((d) => d)
+                .classed('h-bar', true)
+                .style('width', function(d){return d.value * 3} )
+                .style('background-color', (d)=>scale(d.color))
+                // .merge(bars)
+
+            bars.enter()
+                .append('div')
+                .text((d) => d.value)
+                .classed('h-bar', true)
+                .style('width', (d) => d.value * 3)
+                .style('background-color', (d)=>scale(d.color))
+        }
+var data = [
+    
+]
+
+function randomValue(){
+    return Math.round(Math.random()*100)
+}
+
+for(var i=1;i<11;i++){
+    data.push({value:randomValue(), color: randomValue()})
+}
+
+console.log(data);
+
+render(data);
+
+
+
+        // .attr('class', 'h-bar')
+
+    </script>
+
+</body>
+
+</html>

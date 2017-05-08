@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <title>Test</title>
+
+    <style>
+        .h-bar {
+            min-width: 15px;
+            background-color: blue;
+            margin: 5px;
+            padding-bottom: 2px;
+            color: white;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+    <script>
+        
+
+        function render(data) {
+            var bars = d3.select('body').selectAll('div')
+                .data(data)
+                
+            bars.text((d) => d)
+                .classed('h-bar', true)
+                .style('width', function(d){return d * 3} )
+                // .merge(bars)
+
+            bars.enter()
+                .append('div')
+                .text((d) => d)
+                .classed('h-bar', true)
+                .style('width', (d) => d * 3)
+        }
+var data = [23, 54, 66, 5, 45, 67, 89]
+render(data);
+
+setInterval(function(){
+    console.log('Interval')
+    data.shift();
+    data.push(Math.round(Math.random() * 100))
+    console.log(data);
+    render(data);
+},2000)
+
+        // .attr('class', 'h-bar')
+
+    </script>
+
+</body>
+
+</html>
