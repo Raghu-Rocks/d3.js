@@ -1,0 +1,50 @@
+[2017-05-10 19:33:04.790] [INFO] MyLogger - The magic happens on:4000 :>> log at , (,-,:,)
+[2017-05-10 19:34:35.299] [DEBUG] MyLogger - in polls post :>> log at , (,-,:,)
+[2017-05-10 19:34:35.300] [DEBUG] MyLogger - [ { text: 'Delhi' }, { text: 'Mumbai' } ] ':>> log at , (,-,:,)'
+[2017-05-10 19:34:35.306] [DEBUG] MyLogger - { question: 'Which is best city',
+  choices: [ { text: 'Delhi' }, { text: 'Mumbai' } ] } ':>> log at , (,-,:,)'
+[2017-05-10 19:34:37.446] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-10 19:35:34.651] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-10 19:35:34.702] [DEBUG] MyLogger - user connected :>> log at , (,-,:,)
+[2017-05-10 19:35:36.994] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-10 19:36:02.272] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-10 19:36:02.306] [DEBUG] MyLogger - user connected :>> log at , (,-,:,)
+[2017-05-10 19:36:16.643] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-10 19:36:22.477] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-10 19:36:25.241] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-10 19:36:38.142] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-10 19:36:40.250] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-10 19:36:56.826] [DEBUG] MyLogger - user disconnected :>> log at , (,-,:,)
+[2017-05-10 19:38:10.107] [DEBUG] MyLogger - user disconnected :>> log at , (,-,:,)
+[2017-05-11 14:42:31.392] [INFO] MyLogger - The magic happens on:4000 :>> log at , (,-,:,)
+[2017-05-11 14:43:00.080] [INFO] MyLogger - The magic happens on:4000 :>> log at , (,-,:,)
+[2017-05-11 14:46:24.612] [DEBUG] MyLogger - in polls post :>> log at , (,-,:,)
+[2017-05-11 14:46:24.612] [DEBUG] MyLogger - [ { text: 'Angular 2' },
+  { text: 'Angular 1' },
+  { text: 'React JS' },
+  { text: 'Ember JS' } ] ':>> log at , (,-,:,)'
+[2017-05-11 14:46:24.615] [DEBUG] MyLogger - { question: 'What is your choice for JS framework?',
+  choices: 
+   [ { text: 'Angular 2' },
+     { text: 'Angular 1' },
+     { text: 'React JS' },
+     { text: 'Ember JS' } ] } ':>> log at , (,-,:,)'
+[2017-05-11 14:46:29.093] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-11 14:46:29.153] [DEBUG] MyLogger - user connected :>> log at , (,-,:,)
+[2017-05-11 14:46:54.535] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-11 14:46:54.570] [DEBUG] MyLogger - user connected :>> log at , (,-,:,)
+[2017-05-11 14:47:09.269] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-11 14:47:17.094] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-11 14:47:27.240] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-11 14:48:07.142] [DEBUG] MyLogger - in polls post :>> log at , (,-,:,)
+[2017-05-11 14:48:07.142] [DEBUG] MyLogger - [ { text: 'choice 1' }, { text: '2' }, { text: '3' } ] ':>> log at , (,-,:,)'
+[2017-05-11 14:48:07.143] [DEBUG] MyLogger - { question: 'Any question',
+  choices: [ { text: 'choice 1' }, { text: '2' }, { text: '3' } ] } ':>> log at , (,-,:,)'
+[2017-05-11 14:48:21.888] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-11 14:48:35.340] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-11 14:48:46.576] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-11 14:48:55.957] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-11 14:49:00.142] [DEBUG] MyLogger - client ip address: ::1 :>> log at , (,-,:,)
+[2017-05-11 14:49:04.235] [DEBUG] MyLogger - in send:vote :>> log at , (,-,:,)
+[2017-05-11 15:15:29.772] [DEBUG] MyLogger - user disconnected :>> log at , (,-,:,)
+[2017-05-11 15:15:31.875] [DEBUG] MyLogger - user disconnected :>> log at , (,-,:,)

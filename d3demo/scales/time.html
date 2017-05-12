@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ordinal Scale</title>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
+    <script type="text/javascript" src="../../lib/d3.js"></script>
+</head>
+
+<body>
+
+<div id="time" class="clear">
+    <span>Time<br></span>
+</div>
+
+
+
+<script type="text/javascript">
+    var max = 11, data = [];
+    let start = new Date(2016,0,1)
+    let end = new Date(2016,11,31)
+
+   
+    for (var i = 1; i <= max; ++i) data.push(new Date(2016, i, 1)); // <-A
+
+    
+    var timeScale = d3.scaleTime()
+        .domain([start,end])
+        .range([0, 1200])
+        
+    function render(data, scale, selector) { // <-C
+        var cells  = d3.select(selector).selectAll("div.fixed-cell")
+                .data(data);
+
+        cells.enter()
+                .append("div")
+                    .classed("fixed-cell", true)
+                    .style("margin-left", function(d){ // <-F
+                            return scale(d) + "px";
+                        })
+                        .html(function (d) { // <-G
+                            // var format = d3.timeFormat("%x"); // <-H
+                            return format(d) + d3.format('0.2')(scale(d),2) + "px";
+                        });
+    }
+
+    render(data, timeScale, "#time"); // <-F
+    // render(data, divergingScale, "#diverging"); // <-F
+   
+</script>
+
+</body>
+
+</html>

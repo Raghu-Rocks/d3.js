@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ordinal Scale</title>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
+    <script type="text/javascript" src="../../lib/d3.js"></script>
+</head>
+
+<body>
+
+<div id="color" class="clear">
+    <span>Color<br></span>
+</div>
+<div id="diverging" class="clear">
+    <span>D Color<br></span>
+</div>
+
+
+<script type="text/javascript">
+    var max = 21, data = [];
+
+    for (var i = 1; i <= max; ++i) data.push(i); // <-A
+    
+    var colorScale = d3.scaleLinear() // <-B
+        .domain([1, 21])
+        .range(["white", "blue"]);
+
+        let pivot = 5;
+        let divergingScale = d3.scaleLinear()
+            .domain([1, 5, 11])
+            .range(["white", "blue", "white"]);
+        
+    function render(data, scale, selector) { // <-C
+        var cells  = d3.select(selector).selectAll("div.cell")
+                .data(data);
+
+        cells.enter()
+                .append("div")
+                    .classed("cell", true)
+                    .style("display", "inline-block")
+                    .style("background-color", function(d){  // <-D
+                       
+                        console.log(scale(d));
+                        return scale(d)
+                    })
+                    .text(function (d) { // <-E
+                        return d;
+                    });
+    }
+
+    render(data, colorScale, "#color"); // <-F
+    render(data, divergingScale, "#diverging"); // <-F
+   
+</script>
+
+</body>
+
+</html>

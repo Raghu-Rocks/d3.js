@@ -1,0 +1,62 @@
+<section id="mu-contact">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-md-12">
+				<div class="mu-contact-area">
+					<!-- start title -->
+                    <div class="mu-title">
+						<h1>View Survey</h1>
+					</div> 
+					<div class="mu-contact-content">
+						<div class="row">
+							<div class="col-md-12">
+
+								<div class="well well-lg">
+			<strong>Question</strong>
+			<br>{{poll.question}}
+		</div>
+
+		<div *ngIf="!poll.userVoted">
+			<p class="lead">Please select one of the following options:</p>
+
+			<form>
+				<div *ngFor="let choice of poll.choices;let i = index;" class="radio">
+					<label>
+						<input type="radio" name="choice" value="{{choice._id}}" [(ngModel)]="poll.userVote"> {{choice.text}}
+					</label>
+				</div>
+				<hr/>
+				<div class="row">
+					<div class="col-xs-6">
+						<a [routerLink]="['/survey','list']" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span>Back to Survey List</a>
+					</div>
+					<div class="col-xs-6">
+						<button class="btn btn-primary pull-right" type="button" (click)="onVote()">Vote &raquo;</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div *ngIf="!!poll.userVoted">
+			
+
+			<bar-chart *ngIf="chartData" [data]="chartData"></bar-chart>
+			<div class="col-xs-6">
+					<a [routerLink]="['/survey','list']" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to Poll List</a>
+				</div>
+
+		</div>
+							</div>
+
+						</div>
+					</div>
+					<!-- end contact content -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section>
+    <!--<bar-graph></bar-graph>-->
+</section>

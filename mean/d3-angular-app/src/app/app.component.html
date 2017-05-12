@@ -1,0 +1,18 @@
+<h1>
+  {{title}}
+</h1>
+<!--<app-svg></app-svg>-->
+<hr/>
+
+  <label for="term">Track Tweets containing</label>
+	<input type="text" id="term" name="term" [(ngModel)]="term" placeholder="Search term" required />
+	<button (click)="setSearchTerm(term)">Search</button>
+<hr/>
+<div id="scatterplot">
+  <app-scatterplot [twitterState]="twitterState"></app-scatterplot>
+</div>
+<div id="map">
+  <app-map [twitterState]="twitterState"></app-map>
+</div>
+<hr/>
+<app-tweet [tweets] = "tweets"></app-tweet>

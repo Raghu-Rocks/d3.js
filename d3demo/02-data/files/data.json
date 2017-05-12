@@ -1,0 +1,8 @@
+[
+            { "expense": 24, "category": "Bills" },
+            { "expense": 76, "category": "Electricity" },
+            { "expense": 98, "category": "Gas" },
+            { "expense": 45, "category": "Electricity" },
+            { "expense": 65, "category": "Bills" },
+            { "expense": 12, "category": "Gas" }
+        ]

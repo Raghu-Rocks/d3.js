@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Array as Data</title>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
+    <script type="text/javascript" src="../../lib/d3.js"></script>
+</head>
+
+<body>
+    <div id="linear" class="clear" ></div>
+    <div id="pow" class="clear" ></div>
+    <div id="powCapped" class="clear" ></div>
+
+<script type="text/javascript">
+
+let width = 3;
+let data = [];
+
+let scale = d3.scaleLinear()
+    .domain([0, 10])
+    .range([0,width]);
+
+let powScale = d3.scalePow().exponent(2) 
+
+ var powCapped = d3.scalePow() // <-F
+        .exponent(2)
+        .domain([1, 10])
+        .rangeRound([1, 100]); // <-G
+
+
+let render = function(data, scale, selector){
+    var selection = d3.select(selector)
+    .selectAll('div.cell')
+    .data(data)
+
+
+    selection.enter()
+        .append('div')
+        .classed('cell', true)
+        .style("display", "inline-block")
+        .text(function(d,i){
+            // return scale(d);
+            return d3.format('3')(scale(d));
+        })
+
+
+}
+
+for(let i=1;i<11;i++){
+    data.push(i);
+}
+
+render(data, scale, '#linear')
+render(data, powScale, '#pow')
+render(data, powCapped, '#powCapped')
+    
+</script>
+
+</body>
+
+</html>

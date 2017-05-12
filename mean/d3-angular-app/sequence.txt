@@ -1,0 +1,207 @@
+npm i d3 -S
+npm i @types/d3 -D
+
+src/app> ng generate component svg
+
+	import { ElementRef } from "@angular/core";
+	import * as D3 from "d3";
+
+	constructor(private _element: ElementRef){
+		this.host = D3.select(this._element.nativeElement)
+	}
+
+	ngOnInit(){
+		this.buildSvg();
+	}
+
+	buildSvg():void{
+		this.host.html("");
+		this.svg = this.host.append("svg")
+			.attr("width", "600")
+			.attr("height", "400")
+			.style("border", "1px solid #ddd");
+	}
+
+src/app/shared - tweet.service.ts
+	import { Http, Response } from '@angular/http';
+	import { Injectable } from '@angular/core';
+	import { Observable } from 'rxjs/Observable';
+	import * as io from 'socket.io-client/dist/socket.io';
+
+	@Injectable()
+	export class TweetService {
+	  private url = 'http://localhost:3000';
+	  private socket;
+
+	  constructor (private _http: Http) { }
+
+	  connectToStream() {
+	    let observable = new Observable(observer => {
+	      this.socket = io(this.url);
+	      this.socket.on('tweet', (tweet) => {
+		observer.next(tweet);
+	      });
+	      return () => {
+		this.socket.disconnect();
+	      }; 
+	    })
+	    return observable;
+	  }
+
+	  setSearchTerm(searchTerm: string): Observable<any> {
+	    return this._http.get(`${this.url}/stream/${searchTerm}`)
+	      .map(this.extractData)
+	      .catch(this.handleError);
+	  }
+
+	  private extractData(res: Response) {
+	    let body = res.json();
+	    return body.data || {};
+	  }
+
+	  private handleError(error: any) {
+	    let errMsg = (error.message) ? error.message :
+	      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+	    console.error(errMsg);
+	    return Promise.reject(errMsg);
+	  }
+	}
+
+
+tweet.component.ts
+	import { Component, OnInit, ElementRef } from '@angular/core';
+	import * as D3 from "d3/index";
+
+	import { TweetService } from "./../shared/tweet.service";
+
+	@Component({
+	  selector: 'app-tweet',
+	  templateUrl: './tweet.component.html',
+	  styleUrls: ['./tweet.component.css']
+	})
+	export class TweetComponent implements OnInit {
+
+	  errorMessage:string;
+	  host;
+	  streamContainer;
+	  term:string;
+
+	  constructor(private _element: ElementRef, private _tweetService: TweetService){
+	    this.host = D3.select(this._element.nativeElement)
+	  }
+
+	ngOnInit(){
+		this.buildSvg();
+		this.connectToTweetStream();
+	}
+
+	buildSvg():void{
+	  this.streamContainer = this.host.append('div')
+	}
+
+	connectToTweetStream(){
+		this._tweetService.connectToStream()
+			.subscribe(
+				tweet => {
+	  console.log(tweet)
+	  this.streamContainer.append('p').html(JSON.stringify(tweet));
+				},
+				error => this.errorMessage = <any>error
+			);
+	}
+
+	setSearchTerm(searchTerm){
+		this._tweetService.setSearchTerm(searchTerm)
+			.subscribe(
+				() => console.log(`Search term set to $(searchTerm)`),
+				error => this.errorMessage = <any>error
+			)
+	}
+
+	}
+
+
+
+tweet.component.html
+	<label for="term">Track Tweets containing</label>
+	<input type="text" id="term" name="term" [(ngModel)]="term" placeholder="Search term" required />
+	<button (click)="setSearchTerm(term)">Search</button>
+	
+	
+	
+"socket.io": "^2.0.1",
+"twitter": "^1.7.0",
+"express": "^4.15.2",
+
+server.js
+	const express = require('express');
+	const http = require('http');
+	const path = require('path');
+	const twit = require('twitter');
+
+	const app = express();
+	// const mapData = require('./us-states.json');
+	const port = process.env.PORT || 3000;
+	const router = express.Router();
+	const staticRoot = __dirname+"/dist";
+
+// =============================>
+	const CONSUMER_KEY = CONSUMER_KEY;
+	const CONSUMER_SECRET = CONSUMER_SECRET;
+	const ACCESS_TOKEN_KEY = ACCESS_TOKEN_KEY;
+	const ACCESS_TOKEN_SECRET = ACCESS_TOKEN_SECRET;
+// =============================>
+	
+	const twitter = new twit({
+	  consumer_key: CONSUMER_KEY,
+	  consumer_secret: CONSUMER_SECRET,
+	  access_token_key: ACCESS_TOKEN_KEY,
+	  access_token_secret: ACCESS_TOKEN_SECRET
+	});
+
+	app.set('port', (port));
+	app.use(express.static(staticRoot));
+
+	app.get('/', (req, res) => {
+	  res.sendFile('./dist/index.html');
+	});
+
+	const server = http.createServer(app).listen(port, () => console.log(`Server listening on port ${port}`));
+
+	const io = require('socket.io').listen(server);
+
+	app.get('/stream/:searchTerm', (req, res, next) => {
+	  const searchTerm = req.params.searchTerm
+
+	  twitter.stream('statuses/filter', {track: searchTerm}, (stream) => {
+	    stream.on('data', (data) => {
+	      data.location = data.geo ? data.geo.coordinates : [];
+	      const tweet = {
+		created_at: data.created_at,
+		text: data.text,
+		username: data.user ? data.user.screen_name : '',
+		followers_count: data.user ? data.user.followers_count : '',
+		following_count: data.user ? data.user.friends_count : '',
+		statuses_count: data.user ? data.user.statuses_count : '',
+		profile_image_url: data.user ? data.user.profile_image_url : '',
+		coordinates: data.location
+	      };
+	      io.emit('tweet', tweet);
+	    });
+
+	    stream.on('error', (error) => {
+	      throw error;
+	    });
+	  });
+	});
+
+	app.get('/mapData', (req, res) => {
+	  res.status(200).json({data: mapData});
+	});
+
+
+
+
+
+
+

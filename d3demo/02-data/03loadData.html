@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <title>Test</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+    <script>
+        function renderSorted(comparator) {
+            var bars = d3.select("body").selectAll("div.h-bar") // <-B
+                .data(data);
+                
+
+            // Enter
+            bars.enter().append("div") 
+                .attr("class", "h-bar")
+                .append("span");
+
+            // Update
+            d3.selectAll("div.h-bar") // 
+            .style("width", function (d) {
+                    return (d.expense * 5) + "px";
+                })
+                .select("span")
+                .text(function (d) {
+                    return d.category;
+                });
+                
+
+            // Sort
+            if (comparator)
+                bars.sort(comparator); 
+
+        }
+
+        function render(data, category) {
+
+            var bars = d3.select("body").selectAll("div.h-bar") // <-B
+                .data(data);
+
+            // Enter
+            bars.enter()
+                .append("div") // <-C
+                .attr("class", "h-bar")
+                .style("width", function (d) {
+                    return (d.expense * 5) + "px";                
+}
+                )
+                .append("span") // <-D
+                .text(function (d) {
+                    return d.category;
+                });
+
+            //Update
+            // d3.selectAll("div.h-bar").attr("class", "h-bar");
+
+
+
+            bars.filter(function (d, i) { // <-E
+                return d.category == category;
+            })
+                .classed("selected", true);
+
+        }
+        var data = []
+
+
+        d3.json('files/data.json', function(err,content){
+            if(err) throw err;
+            console.log(content);
+            data = content;
+            console.log(data);
+            renderSorted();
+        });
+
+
+        function filterAll(category) {
+            render(data, category);
+        }
+
+        function sort(comparator) {
+            renderSorted(comparator)
+
+        }
+
+        function compareByExpense(a, b) {
+            return a.expense < b.expense ? -1 : 1
+        }
+        function compareByCategory(a, b) {
+            return a.category < b.category ? -1 : 1
+        }
+
+        // .attr('class', 'h-bar')
+    </script>
+
+    <div>
+        <button onclick="filterAll('Gas')">Gas</button>
+        <button onclick="filterAll('Electricity')">Electricity</button>
+        <button>Bills</button>
+    </div>
+
+
+    <div class="control-group">
+        <button onclick="sort(compareByExpense)">
+        Sort by Expense
+    </button>
+        <button onclick="sort(compareByCategory)">
+        Sort by Category
+    </button>
+        <button onclick="sort()">
+        Reset
+    </button>
+    </div>
+
+</body>
+
+</html>

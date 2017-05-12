@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Line Chart</title>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
+    <script type="text/javascript" src="../../lib/d3.js"></script>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        // margins, xStart, get/set('width, height,margins')
+        // render margins
+        // render axis
+        // quadrantWidth, Height
+        //
+
+        var chart = function () {
+
+            var obj = {}
+
+            var _height = 500, _width = 500,
+                _margins = { left: 30, top: 30, right: 30, bottom: 30 },
+                _svg,
+                _xScale = d3.scaleLinear().domain([1, 1000])
+                , _yScale = d3.scaleLinear().domain([1, 1000])
+
+
+            function xStart() {
+                return _margins.left
+            }
+            function xEnd() {
+                return _width - _margins.right
+            }
+            function yStart() {
+                return _height - _margins.bottom
+            }
+            function yEnd() {
+                return _margins.top
+            }
+
+            obj.width = function(w){
+                if(!arguments.length) return _width;
+                if(w) _width = w;
+                return obj
+            }
+            obj.height = function(h){
+                if(!arguments.length) return _height;
+                if(h) _height = h;
+                return obj
+            }
+            obj.margins = function(m){
+                if(!arguments.length) return _margins;
+                if(m) _margins = m;
+                return obj
+            }
+
+            obj.xScale = function(s){
+                if(!arguments.length) return _x;
+                if(s) _xScale = s;
+                return obj
+            }
+            obj.yScale = function(s){
+                if(!arguments.length) return _y;
+                if(s) _yScale = s;
+                return obj
+            }
+
+            function quadrantWidth() {
+                return _width - _margins.left - _margins.right;
+            }
+            function quadrantHeight() {
+                return _height - _margins.top - _margins.bottom;
+            }
+
+            obj.render = function() {
+                _svg = d3.select('body').append('svg')
+                    .attr('height', _height)
+                    .attr('width', _width)
+                    .style('border', '1px solid black')
+
+
+                    renderXAxis()
+                    renderYAxis()
+                
+            }
+
+            let renderXAxis = function(){
+
+                // let scale = 
+                 _xScale.range([0, quadrantWidth()]);
+                let axis = d3.axisBottom(_xScale);
+
+                _svg.append('g')
+                    .classed('x-axis', true)
+                     .attr('transform', 'translate(' + xStart() + ',' + yStart() + ')')
+                    .call(axis);
+            }
+
+            let renderYAxis = function(){
+                // _xScale.range([1, quadrantWidth()]);
+                 _yScale.range([quadrantHeight(),0]);
+                let axis = d3.axisLeft(_yScale);
+
+                _svg.append('g')
+                    .classed('y-axis', true)
+                     .attr('transform', 'translate(' + yEnd() + ',' + xStart() + ')')
+                    .call(axis);
+            }
+
+            return obj;
+
+        }
+
+
+
+       chart()
+        .width(700)
+        .height(700)
+        .margins({ left: 50, top: 50, right: 50, bottom: 50 })
+        .xScale(d3.scaleLinear().domain([1, 100]))
+        .yScale(d3.scaleLinear().domain([1, 100]))
+        .render();
+        // console.log(obj)
+
+    </script>
+
+</body>
+
+</html>

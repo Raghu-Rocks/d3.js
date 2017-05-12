@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Line Chart</title>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css" />
+    <script type="text/javascript" src="../../lib/d3.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript">
+    var _height= 500, _width = 500;
+
+    function render(){
+        d3.select('body').append('svg')
+            .attr('height', _height )
+            .attr('width', _width )
+            .style('border', '1px solid black')
+    }
+
+    render();
+
+
+</script>
+
+</body>
+
+</html>

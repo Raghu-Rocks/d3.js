@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>Test</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+    <script>
+        let max = 11
+        let data = []
+
+        for(let i=1;i<max;i++) data.push(i);
+        console.log(data);
+
+        let render = function(){
+
+        var scaleLinear = d3.scaleLinear()
+                .domain([1, max])
+                .range(['1px solid red','10px solid red'])
+                
+
+        var selection = d3.select('body').selectAll('div.cell')
+            .data(data)
+
+            selection.enter()
+                .append('div')
+                .classed('cell', true)
+                .text(function(d,i){
+                   return d 
+                })
+                .style('border', (d)=>scaleLinear(d));
+                // .style('background-color', (d)=>scaleOrdinal(d));
+        }     
+
+        render(data)
+
+    </script>
+
+
+
+
+    </div>
+
+</body>
+
+</html>

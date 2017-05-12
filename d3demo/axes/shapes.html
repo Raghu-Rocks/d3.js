@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <title>Test</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+    svg line{
+        fill: none;    
+        stroke: steelblue;
+        stroke-width: 2;
+    }
+    svg circle{
+        fill: red;    
+        stroke: steelblue;
+        stroke-width: 2;
+    }
+    svg rect{
+        fill: blue;    
+        stroke: steelblue;
+        stroke-width: 2;
+    }
+    </style>
+</head>
+
+<body>
+
+
+    <svg width="500" height="500" style="border: 1px solid black;"><line x1="0" y1="0" x2="250" y2="250"></line><circle cx="100" cy="100" r="50"></circle></svg>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.js"></script>
+    <script>
+
+        var svg, width=500,
+        height= 500,
+        margin = 50;
+
+        function createSvg(){
+            svg = d3.select('body').append('svg')
+                        .attr('width', width)
+                        .attr('height', height)
+                        .style('border', '1px solid black')
+
+            // svg.append('path')
+                svg.append('line')
+                .attr('x1',0)            
+                .attr('y1',0)            
+                .attr('x2',250)            
+                .attr('y2',250) 
+                .attr('transform', 'translate(' + 100 + ',' + 0 + ')') 
+
+                svg.append('circle')
+                .attr('cx',100)            
+                .attr('cy',100)            
+                .attr('r',50)            
+                
+                svg.append('rect')
+                .attr('x',300)            
+                .attr('y',100)            
+                .attr('height',100)            
+                .attr('width',150)            
+                .attr('rx',10)            
+                    
+        }
+
+       
+
+        createSvg();
+       
+       
+
+
+       
+
+    </script>
+
+
+
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ordinal Scale</title>
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css"/>
+    <script type="text/javascript" src="../../lib/d3.js"></script>
+</head>
+
+<body>
+
+<div id="compound" class="clear">
+    <span>Color<br></span>
+</div>
+
+
+
+<script type="text/javascript">
+
+    var max = 10, data = [];
+
+    for (var i = 1; i <= max; ++i) data.push(i); // <-A
+
+    let scale = d3.scaleLinear()
+        .domain([1,10])
+        .range([{height: "15px", color: "red"},{height: "150px", color: "blue"}]);
+   
+   let render = function(data, scale, selector){
+
+       var selection = d3.select(selector).selectAll('div.v-bar')
+            .data(data)
+
+        selection.enter()
+            .append('div')
+                .classed('v-bar', true)
+                .style('height', (d)=>scale(d).height)
+                .style('background-color', (d)=>scale(d).color)
+                .text((d,i) => d)
+   }
+   
+
+   render(data, scale, '#compound')
+</script>
+
+</body>
+
+</html>

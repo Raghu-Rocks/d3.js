@@ -1,0 +1,9 @@
+html
+    head
+        title = "Register"
+    body
+        p= errorMessage
+        form(action="register" method="post")
+            input(type="text" name="email")
+            input(type="password" name="pwd" )
+            input(type="submit" value="Register")

@@ -1,0 +1,61 @@
+<section id="mu-contact">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="mu-contact-area">
+					<!-- start title -->
+					<div class="mu-title">
+						<h1>Create New Survey</h1>
+					</div>
+					<!-- end title -->
+					<!-- start contact content -->
+					<div class="mu-contact-content">
+						<div class="row">
+							<div class="col-md-12">
+
+								<!--------------------------------------------------------------->
+								<form (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<label for="pollQuestion">Survey Question</label>
+				<input type="text" class="form-control" placeholder="Enter poll question" [(ngModel)]="survey.question" name="question" required="required"/>
+			</div>
+
+			<div class="form-group">
+				<label>Choices</label>
+				<div *ngFor="let choice of survey.choices;let i = index">
+					<input type="text" [(ngModel)]="choice.text" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter choice {{i+1}}" required="required" /><br>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<button type="button" class="btn btn-default" (click)="addChoice()"><span class="glyphicon glyphicon-plus"></span>Add Choice</button>
+				</div>
+				<div class="col-xs-12">
+					<button type="button" class="btn btn-default" (click)="removeChoice()" [disabled]="!(survey.choices.length-2)>0"><span class="glyphicon glyphicon-minus"></span>Remove Last Choice</button>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="row">
+				<div class="col-xs-6">
+					<a [routerLink]="['/survey','list']" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to Poll List</a>
+				</div>
+				<div class="col-xs-6">
+					<button class="btn btn-primary pull-right" type="submit">Create Survey</button>
+				</div>
+			</div>
+
+		</form>
+								<!---------------------------------------------------------------------------->
+							</div>
+
+						</div>
+					</div>
+					<!-- end contact content -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
